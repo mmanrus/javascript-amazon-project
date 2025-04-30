@@ -1,4 +1,4 @@
-
+import {cart} from '../data/cart.js';
 let productsHTML = ''; // accumulator pattern
 products.forEach((product)=>{
     productsHTML += `
@@ -54,6 +54,7 @@ products.forEach((product)=>{
         </div>
     `;
 });
+
 document.querySelector('.js-products-grid').innerHTML = productsHTML;
 document.querySelectorAll('.js-add-to-cart').forEach((button)=>{ // Data Attribute attach any information to the element
     button.addEventListener('click', ()=>{
@@ -72,6 +73,16 @@ document.querySelectorAll('.js-add-to-cart').forEach((button)=>{ // Data Attribu
           });
         }
         console.log(cart);
-
+        let quantity = cartQuantity(cart);
+        
+      document.querySelector('.cart-quantity').innerText = quantity;
     })
 });
+function cartQuantity(cart) {
+  let quantity = 0;
+  cart.forEach((item)=>{
+    quantity+=item.quantity;
+  });
+  return quantity
+}
+

@@ -658,3 +658,8 @@ export const products = [
     ]
   }
 ];
+
+export const productById = products.reduce((acc, product) =>{
+  acc[product.id] = product;
+  return acc;
+}, {});

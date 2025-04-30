@@ -1,4 +1,4 @@
-import {cart} from '../data/cart.js';
+import {cart, addToCart} from '../data/cart.js';
 import {products} from '../data/products.js';
 let productsHTML = ''; // accumulator pattern
 products.forEach((product)=>{
@@ -57,33 +57,22 @@ products.forEach((product)=>{
 });
 
 document.querySelector('.js-products-grid').innerHTML = productsHTML;
+
 document.querySelectorAll('.js-add-to-cart').forEach((button)=>{ // Data Attribute attach any information to the element
-    button.addEventListener('click', ()=>{
+    
+  button.addEventListener('click', ()=>{
         const productId = button.dataset.productId;
-        let found = false;
-        cart.forEach((item)=>{
-          if (productId === item.productId){
-            item.quantity++;
-            found = true;
-          }
-        });
-        if (!found){
-          cart.push({
-            productId: productId,
-            quantity: 1,
-          });
-        }
+        addToCart(productId);
         console.log(cart);
-        let quantity = cartQuantity(cart);
-        
-      document.querySelector('.cart-quantity').innerText = quantity;
+        UpdateCartQuantity(cart);
     })
 });
-function cartQuantity(cart) {
+
+function UpdateCartQuantity(cart) {
   let quantity = 0;
-  cart.forEach((item)=>{
-    quantity+=item.quantity;
+  cart.forEach((cartItem)=>{
+    quantity+=cartItem.quantity;
   });
-  return quantity
+  document.querySelector('.cart-quantity').innerText = quantity;
 }
 

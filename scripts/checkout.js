@@ -6,9 +6,10 @@ let cartHTML = '';
 console.log(productById["bc2847e9-5323-403f-b7cf-57fde044a955"].image);
 
 cartModule.cart.forEach((cartItem)=>{
+     console.log(cartItem);
      const productId = cartItem.id;
      const itemInstance = productById[productId];
-     
+     console.log(itemInstance.id);
      cartHTML += `
                <div class="cart-item-container js-cart-item js-cart-item-container-${itemInstance.id}">
             <div class="delivery-date">
@@ -88,7 +89,7 @@ cartModule.cart.forEach((cartItem)=>{
      `;
      
 });
-const cartItemClass = document.querySelector('.js-cart-item');
+const cartItemClass = document.querySelector('.order-summary');
 cartItemClass.innerHTML = cartHTML;
 
 document.querySelectorAll('.js-delete-link')

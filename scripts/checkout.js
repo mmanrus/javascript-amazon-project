@@ -3,7 +3,7 @@ import {productById} from '../data/products.js';
 import {formatCurrency} from './utils/money.js';
 import dayjs from 'https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js';
 import {deliveryOptions} from '../data/deliveryOptions.js';
-
+import * as summary from './orderSummary.js';
 
 
 function renderOrderSummary(){
@@ -109,6 +109,8 @@ function renderOrderSummary(){
     element.addEventListener('click', ()=>{
       const {productId, deliveryOptionId} = element.dataset;
       cartModule.updateDeliveryOption(productId, deliveryOptionId);
+      summary.calculateShipping();
+      summary.paymentBeforeTax();
       renderOrderSummary();
     });
   });

@@ -15,12 +15,12 @@ export function totalItems(){
 }
 export function calculateItemPayment(){
     let paymentSummaryCents = 0; 
-    console.log(cartModule.cart);
+
     cartModule.cart.forEach((cartItem)=>{
         const productId = cartItem.id;
         const itemInstance = productById[productId];
         paymentSummaryCents += cartItem.quantity * itemInstance.priceCents;
-        console.log(paymentSummaryCents);
+    
     });
     document.querySelector('.js-payment-summary-money').innerText = `$${formatCurrency(paymentSummaryCents)}`;
 
@@ -56,9 +56,7 @@ export function estimatedTax(paymentBeforeTax){
 }
 
 export function totalCost(paymentBeforeTax, estimatedTax){
-    console.log(paymentBeforeTax, estimatedTax);
     let total = parseFloat(formatCurrency(paymentBeforeTax)) + parseFloat(formatCurrency(estimatedTax));
-    console.log(`Total ${total}`);
     document.querySelector('.js-payment-summary-order-total').innerText = `$${total}`;
 }   
 

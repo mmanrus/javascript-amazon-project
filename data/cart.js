@@ -2,7 +2,6 @@
 const storedCart = localStorage.getItem('cart');
 export var cart = storedCart ? JSON.parse(storedCart): 
 [{id: "bc2847e9-5323-403f-b7cf-57fde044a955", quantity: 3, deliveryOptionId: '1'}];
-console.log(cart);
 function saveToStorage(){
      localStorage.setItem('cart', JSON.stringify(cart));
 }

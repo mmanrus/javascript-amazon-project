@@ -1,10 +1,23 @@
 
-const storedCart = localStorage.getItem('cart');
-export var cart = storedCart ? JSON.parse(storedCart): 
-[{id: "bc2847e9-5323-403f-b7cf-57fde044a955", quantity: 3, deliveryOptionId: '1'}];
-function saveToStorage(){
-     localStorage.setItem('cart', JSON.stringify(cart));
+export var cart;
+
+export function loadFromStorage() {
+  const storedCart = localStorage.getItem('cart');
+  cart = storedCart
+    ? JSON.parse(storedCart)
+    : [{
+        id: "bc2847e9-5323-403f-b7cf-57fde044a955",
+        quantity: 3,
+        deliveryOptionId: '1'
+      }];
 }
+
+export function saveToStorage() {
+  localStorage.setItem('cart', JSON.stringify(cart));
+}
+
+// Load cart immediately when the module runs
+loadFromStorage();
 export function addToCart (productId){
      let found = false;
           cart.forEach((item)=>{

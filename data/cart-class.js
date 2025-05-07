@@ -1,16 +1,16 @@
 class Cart {
      cartItems = undefined;
-     localStorageKey = undefined;
+     #localStorageKey = undefined;
      
      constructor(localStorageKey) {
-          this.localStorageKey = localStorageKey;
+          this.#localStorageKey = localStorageKey;
           // Load cart immediately when the module runs
-          this.loadFromStorage();
+          this.#loadFromStorage();
           
      }
 
-     loadFromStorage() {
-          const storedCart = localStorage.getItem(this.localStorageKey);
+     #loadFromStorage() {
+          const storedCart = localStorage.getItem(this.#localStorageKey);
           this.cartItems = storedCart
           ? JSON.parse(storedCart)
           : [{
@@ -21,7 +21,7 @@ class Cart {
      }
 
      saveToStorage() {
-          localStorage.setItem(this.localStorageKey, JSON.stringify(this.cartItems));
+          localStorage.setItem(this.#localStorageKey, JSON.stringify(this.cartItems));
      }
      addToCart (productId){
           let found = false;

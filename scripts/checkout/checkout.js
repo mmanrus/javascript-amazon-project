@@ -1,10 +1,10 @@
-import * as cartModule from '../data/cart.js';
-import {productById} from '../data/products.js';
-import {formatCurrency} from './utils/money.js';
+import * as cartModule from '../../data/cart.js';
+import {productById} from '../../data/products.js';
+import {formatCurrency} from '../utils/money.js';
 import dayjs from 'https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js';
-import {deliveryOptions} from '../data/deliveryOptions.js';
+import {deliveryOptions} from '../../data/deliveryOptions.js';
 import * as summary from './orderSummary.js';
-
+import '../../data/cart-oop.js';
 
 function renderOrderSummary(){
   let cartHTML = '';
@@ -91,9 +91,12 @@ function renderOrderSummary(){
     });
     return html;
   }
-  const cartItemClass = document.querySelector('.order-summary');
-  cartItemClass.innerHTML = cartHTML;
 
+  const cartItemClass = document.querySelector('.order-summary');
+  if (cartItemClass) {
+    cartItemClass.innerHTML = cartHTML;
+  }
+  console.log(cartItemClass);
   document.querySelectorAll('.js-delete-link')
       .forEach((link) => {
         link.addEventListener('click', ()=>{
@@ -115,5 +118,6 @@ function renderOrderSummary(){
     });
   });
 }
-
-renderOrderSummary();
+document.addEventListener('DOMContentLoaded', () => {
+  renderOrderSummary();
+});

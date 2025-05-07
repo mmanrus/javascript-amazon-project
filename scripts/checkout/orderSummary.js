@@ -1,10 +1,9 @@
-import * as cartModule from '../data/cart.js';
-import {productById} from '../data/products.js';
-import {formatCurrency} from './utils/money.js';
-import {deliveryOptions} from '../data/deliveryOptions.js';
+import * as cartModule from '../../data/cart.js';
+import {productById} from '../../data/products.js';
+import {formatCurrency} from '../utils/money.js';
+import {deliveryOptions} from '../../data/deliveryOptions.js';
 // render
 document.querySelector('.js-payment-summary');
-
 
 export function totalItems(){
     let quantity = 0;
@@ -22,6 +21,7 @@ export function calculateItemPayment(){
         paymentSummaryCents += cartItem.quantity * itemInstance.priceCents;
     
     });
+    console.log
     document.querySelector('.js-payment-summary-money').innerText = `$${formatCurrency(paymentSummaryCents)}`;
 
     return paymentSummaryCents;
@@ -44,7 +44,7 @@ export function paymentBeforeTax(){
     let totalShippingCents = calculateShipping();
     let paymentSummaryCents = calculateItemPayment();
     
-    document.querySelector('.js-payment-summary-befor-tax').innerText = `$${formatCurrency(totalShippingCents + paymentSummaryCents)}`;
+    document.querySelector('.js-payment-summary-before-tax').innerText = `$${formatCurrency(totalShippingCents + paymentSummaryCents)}`;
     estimatedTax(totalShippingCents + paymentSummaryCents);
     return totalShippingCents + paymentSummaryCents;
 }
@@ -60,8 +60,7 @@ export function totalCost(paymentBeforeTax, estimatedTax){
     document.querySelector('.js-payment-summary-order-total').innerText = `$${total}`;
 }   
 
-totalItems();
-paymentBeforeTax();
-calculateShipping();
-calculateItemPayment();
-
+document.addEventListener('DOMContentLoaded', () => {
+    totalItems();
+    paymentBeforeTax();
+});

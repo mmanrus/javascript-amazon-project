@@ -1,5 +1,5 @@
 import * as cartModule from '../../data/cart.js';
-import {productById} from '../../data/products.js';
+import {productById, loadProducts} from '../../data/products.js';
 import {formatCurrency} from '../utils/money.js';
 import {deliveryOptions} from '../../data/deliveryOptions.js';
 // render
@@ -56,11 +56,14 @@ export function estimatedTax(paymentBeforeTax){
 }
 
 export function totalCost(paymentBeforeTax, estimatedTax){
-    let total = parseFloat(formatCurrency(paymentBeforeTax)) + parseFloat(formatCurrency(estimatedTax));
+    let total = paymentBeforeTax + estimatedTax;
+    total = formatCurrency(total);
     document.querySelector('.js-payment-summary-order-total').innerText = `$${total}`;
 }   
 
 document.addEventListener('DOMContentLoaded', () => {
-    totalItems();
-    paymentBeforeTax();
+    loadProducts(()=>{
+        totalItems();
+        paymentBeforeTax();
+    });
 });

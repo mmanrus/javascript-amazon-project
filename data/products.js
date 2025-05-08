@@ -1,5 +1,5 @@
 import { formatCurrency } from "../scripts/utils/money.js";
-import { renderProductsHTML } from "../scripts/amazon.js";
+
 export class Product {
   id;
   image;
@@ -729,8 +729,8 @@ export const products = [
 */
 
 export let products = [];
-
-export function loadProducts(){
+export let productById = {};
+export function loadProducts(func){
   const xhr = new XMLHttpRequest();
   xhr.addEventListener('load', () => {
     products = JSON.parse(xhr.response).map((productDetails)=>{
@@ -739,14 +739,18 @@ export function loadProducts(){
       }
       return new Product(productDetails);
     });
-    renderProductsHTML();
+    
     console.log('Product is working');
+
+    productById = products.reduce((acc, product) =>{
+      acc[product.id] = product;
+      return acc;
+    }, {});
+    func();
+    console.log('productById');
+    console.log(productById);
   });
   xhr.open('GET', 'https://supersimplebackend.dev/products');
   xhr.send();
 }
 
-export const productById = products.reduce((acc, product) =>{
-  acc[product.id] = product;
-  return acc;
-}, {});

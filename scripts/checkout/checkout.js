@@ -4,8 +4,8 @@ import {formatCurrency} from '../utils/money.js';
 import dayjs from 'https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js';
 import {deliveryOptions} from '../../data/deliveryOptions.js';
 import * as summary from './orderSummary.js';
-import '../../data/cart-class.js';
-import '../../data/backedn-practice.js';
+//import '../../data/cart-class.js';
+//import '../../data/backedn-practice.js';
 
 
 function renderOrderSummary(){

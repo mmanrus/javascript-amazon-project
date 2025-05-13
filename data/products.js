@@ -729,7 +729,7 @@ export const products = [
 */
 export function loadProductsFetch(){
   const promise = fetch(
-    'https://error.supersimplebackend.dev/products'
+    'https://supersimplebackend.dev/products'
   ).then(response=>{  // make http request GET REQUEST
     return response.json();
   }).then(productsData=>{

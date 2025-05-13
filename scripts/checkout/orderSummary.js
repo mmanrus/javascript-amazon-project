@@ -59,6 +59,7 @@ export function totalCost(paymentBeforeTax, estimatedTax){
     let total = paymentBeforeTax + estimatedTax;
     total = formatCurrency(total);
     document.querySelector('.js-payment-summary-order-total').innerText = `$${total}`;
+    return total;
 }   
 
 document.addEventListener('DOMContentLoaded', () => {

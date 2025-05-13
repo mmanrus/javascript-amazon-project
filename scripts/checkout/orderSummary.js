@@ -1,7 +1,8 @@
 import * as cartModule from '../../data/cart.js';
-import {productById, loadProducts} from '../../data/products.js';
+import {productById, loadProductsFetch} from '../../data/products.js';
 import {formatCurrency} from '../utils/money.js';
 import {deliveryOptions} from '../../data/deliveryOptions.js';
+import * as order from '../placeOrder/placeOrder.js';
 // render
 document.querySelector('.js-payment-summary');
 
@@ -51,20 +52,23 @@ export function paymentBeforeTax(){
 
 export function estimatedTax(paymentBeforeTax){
     let estimatedTax = paymentBeforeTax * .10;
-    totalCost(paymentBeforeTax, estimatedTax);
+    
     document.querySelector('.js-payment-summary-estimated-tax').innerText = `$${formatCurrency(estimatedTax)}`;
+    return totalCost(paymentBeforeTax, estimatedTax);
 }
 
 export function totalCost(paymentBeforeTax, estimatedTax){
     let total = paymentBeforeTax + estimatedTax;
     total = formatCurrency(total);
     document.querySelector('.js-payment-summary-order-total').innerText = `$${total}`;
+    order.placeOrder(total);
     return total;
-}   
+}
 
 document.addEventListener('DOMContentLoaded', () => {
-    loadProducts(()=>{
+    loadProductsFetch().then(() => {
         totalItems();
         paymentBeforeTax();
     });
-});
+  });
+  

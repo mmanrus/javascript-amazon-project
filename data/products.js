@@ -756,7 +756,7 @@ loadProductsFetch().then(()=>{
 */
 export let products = [];
 export let productById = {};
-
+/*
 export function loadProducts(func){
   const xhr = new XMLHttpRequest();
   xhr.addEventListener('load', () => {
@@ -780,4 +780,4 @@ export function loadProducts(func){
   xhr.open('GET', 'https://supersimplebackend.dev/products');
   xhr.send();
 }
-
+*/

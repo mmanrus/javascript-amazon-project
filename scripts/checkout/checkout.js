@@ -7,12 +7,15 @@ import * as summary from './orderSummary.js';
 //import '../../data/cart-class.js';
 //import '../../data/backedn-practice.js';
 async function loadPage(){
-  
-  await loadProductsFetch();
-
+  try{
+      await loadProductsFetch();
+  } catch (error){
+      console.log(`Error: ${error}`)
+  }
   renderOrderSummary();
-}
+  }
 
+loadPage();
 console.log(loadPage());
 
 

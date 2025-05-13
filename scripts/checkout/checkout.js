@@ -1,17 +1,24 @@
 import * as cartModule from '../../data/cart.js';
-import {productById, loadProducts} from '../../data/products.js';
+import {productById, loadProductsFetch} from '../../data/products.js';
 import {formatCurrency} from '../utils/money.js';
 import dayjs from 'https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js';
 import {deliveryOptions} from '../../data/deliveryOptions.js';
 import * as summary from './orderSummary.js';
 //import '../../data/cart-class.js';
 //import '../../data/backedn-practice.js';
+async function loadPage(){
+  
+  await loadProductsFetch();
 
-loadProducts(()=>{
   renderOrderSummary();
-});
+}
+
+console.log(loadPage());
+
+
 function renderOrderSummary(){
   let cartHTML = '';
+
   cartModule.cart.forEach((cartItem)=>{
         const productId = cartItem.id;
         const itemInstance = productById[productId];
@@ -122,6 +129,26 @@ function renderOrderSummary(){
     });
   });
 }
+/*
 document.addEventListener('DOMContentLoaded', () => {
   renderOrderSummary();
 });
+
+/*
+new Promise((resolve)=>{
+  console.log('start promise')
+  loadProducts(()=>{
+    console.log('finished loading');
+    resolve();
+  });
+
+}).then(()=>{
+  return new Promise(resolve => {
+    cartModule.loadCart(()=>{
+      resolve();
+    });
+  });
+  
+}).then(()=>{
+  renderOrderSummary();
+});*/

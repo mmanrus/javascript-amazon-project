@@ -44,7 +44,7 @@ export function removeFromCart (productId){
           }
      });
      cart = newCart;
-     saveToStorage(cart);
+     saveToStorage();
 }
 
 export function updateDeliveryOption(productId, deliveryOptionId){
@@ -59,3 +59,5 @@ export function updateDeliveryOption(productId, deliveryOptionId){
      matching.deliveryOptionId = deliveryOptionId;
      saveToStorage();
 }
+
+

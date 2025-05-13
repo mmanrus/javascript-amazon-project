@@ -16,7 +16,6 @@ async function loadPage(){
   }
 
 loadPage();
-console.log(loadPage());
 
 
 function renderOrderSummary(){
@@ -110,7 +109,6 @@ function renderOrderSummary(){
   if (cartItemClass) {
     cartItemClass.innerHTML = cartHTML;
   }
-  console.log(cartItemClass);
   document.querySelectorAll('.js-delete-link')
       .forEach((link) => {
         link.addEventListener('click', ()=>{

@@ -740,14 +740,10 @@ export function loadProductsFetch(){
       return new Product(productDetails);
     });
     
-    console.log('Product is working');
-
     productById = products.reduce((acc, product) =>{
       acc[product.id] = product;
       return acc;
     }, {});
-    console.log('productById');
-    console.log(productById);
   }).catch((event)=>{
     console.log(`Unexpected error. Please try again later. ${event}`);
   });
@@ -771,15 +767,12 @@ export function loadProducts(func){
       return new Product(productDetails);
     });
     
-    console.log('Product is working');
 
     productById = products.reduce((acc, product) =>{
       acc[product.id] = product;
       return acc;
     }, {});
     func();
-    console.log('productById');
-    console.log(productById);
   });
   xhr.addEventListener('error', (event)=>{
     console.log(`Unexpected error. Please try again later. ${event}`);
